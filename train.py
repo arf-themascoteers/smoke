@@ -1,20 +1,20 @@
 import torch
 import torch.nn.functional as F
-from lucas_dataset import LucasDataset
+from my_dataset import MyDataset
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from lucas_machine import LucasMachine
+from my_machine import MyMachine
 
 def train(device):
-    batch_size = 1000
-    cid = LucasDataset(is_train=True)
+    batch_size = 10000
+    cid = MyDataset(is_train=True)
     dataloader = DataLoader(cid, batch_size=batch_size, shuffle=True)
-    model = LucasMachine()
+    model = MyMachine()
     model.train()
     model.to(device)
-    optimizer = torch.optim.Adam(model.parameters(), lr=1e-2, weight_decay=1e-4)
+    optimizer = torch.optim.Adam(model.parameters(), lr=1e-1, weight_decay=1e-3)
     criterion = torch.nn.MSELoss(reduction='mean')
-    num_epochs = 20
+    num_epochs = 1000
     n_batches = int(len(cid)/batch_size) + 1
     batch_number = 0
     loss = None

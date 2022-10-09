@@ -1,11 +1,11 @@
 import torch
-from lucas_dataset import LucasDataset
+from my_dataset import MyDataset
 from torch.utils.data import DataLoader
 from sklearn.metrics import r2_score
 
 def test(device):
     batch_size = 10
-    cid = LucasDataset(is_train=False)
+    cid = MyDataset(is_train=False)
     dataloader = DataLoader(cid, batch_size=batch_size, shuffle=True)
     criterion = torch.nn.MSELoss(reduction='mean')
     model = torch.load("models/soc.h5")
